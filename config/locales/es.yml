@@ -70,7 +70,7 @@ es:
           edit:
             update: Actualizar
             destroy: Eliminar
-            confirm_destroy: ¿Estas seguro?
+            confirm_destroy: ¿Estás seguro?
           create:
             success: Se ha creado un nuevo tipo de iniciativa
             error: Se ha producido un error
@@ -95,7 +95,7 @@ es:
             update: Actualizar
             back: Volver
             destroy: Borrar
-            confirm_destroy: ¿Estas seguro?
+            confirm_destroy: ¿Estás seguro?
           new:
             title: Nuevo ámbito de tipo de iniciativa
             create: Crear
@@ -121,7 +121,7 @@ es:
             update: Actualizar
             validate: Validar la iniciativa
             discard: Descartar la iniciativa
-            confirm: ¿Estas seguro?
+            confirm: ¿Estás seguro?
             send_to_technical_validation: Enviar a validación técnica
             success: La iniciativa ha sido enviada a validación técnica
             export_votes: Exportar soportes
@@ -131,7 +131,7 @@ es:
             title: Información general
           update:
             success: La iniciativa popular ha sido actualizada correctamente
-            error: A ocurrido un error
+            error: Ha ocurrido un error
         committee_requests:
           index:
             title: Miembros del comité
@@ -140,6 +140,12 @@ es:
             revoke: Rechazar
             confirm_revoke: ¿Estás seguro?
             no_members_yet: No hay miembros en el comité promotor de la iniciativa
+      admin_log:
+        initiative:
+          publish: "%{user_name} publicó la iniciativa %{resource_name}"
+          unpublish: "%{user_name} eliminó la iniciativa %{resource_name}"
+          update: "%{user_name} actualizó la iniciativa %{resource_name}"
+          send_to_technical_validation: "%{user_name} envió la iniciativa %{resource_name} a validación técnica"
       states:
         accepted: Aceptada
         expired: Expirada
@@ -153,7 +159,7 @@ es:
       events:
         create_initiative_event:
           email_intro: "%{author_name} %{author_nickname}, a quien estás siguiendo, ha creado una nueva iniciativa, échale un ojo y contribuye:"
-          email_outro: "Has recibido ésta notificación porqué estás siguiendo a %{author_nickname}. Puede dejar de recibirlas siguiendo el enlace anterior."
+          email_outro: "Has recibido esta notificación porqué estás siguiendo a %{author_nickname}. Puede dejar de recibirlas siguiendo el enlace anterior."
           email_subject: "%{author_nickname} ha creado una nueva iniciativa"
           notification_title: <a href="%{author_path}">%{author_name} %{author_nickname}</a> ha creado la iniciativa <a href="%{resource_path}">%{resource_title}</a>.
         endorse_initiative_event:
@@ -198,9 +204,9 @@ es:
         orders:
           label: 'Ordenar iniciativas por:'
           random: Aleatorio
-          recent: Mas reciente
-          most_voted: Mas votado
-          most_commented: Mas comentado
+          recent: Más reciente
+          most_voted: Más votado
+          most_commented: Más comentado
         vote_cabin:
           vote: Firmar
           already_voted: Ya firmado
@@ -237,18 +243,18 @@ es:
       create_initiative:
         select_initiative_type:
           select_initiative_type_help: Las iniciativas ciudadanas son un medio con el que la ciudadanía interviene a fin de que el Ayuntamiento lleve a cabo una determinada actuación de interés general y competencia municipal. ¿Qué iniciativa quieres impulsar?
-          select: Escoje
+          select: Escoge
           back: Volver
-          more_information: (Mas información)
+          more_information: (Más información)
         previous_form:
           continue: Continuar
           back: Volver
           help: En qué consiste la iniciativa? Escribe el título y la descripción. Te recomendamos que el título sea corto y conciso, y la descripción esté centrada en la solución que se propone.
-          more_information: (Mas información)
+          more_information: (Más información)
         show_similar_initiatives:
           continue: Mi iniciativa es diferente
           back: Volver
-          more_information: (Mas información)
+          more_information: (Más información)
           compare_help:
             Si alguna de las siguientes iniciativas coincide con la tuya te recomendamos que te unas a ella.
             Tu propuesta tiene mas posibilidades de llevarse a cabo.
@@ -263,12 +269,12 @@ es:
               <li>Hay que seleccionar el tipo de firma. Presencial, digital o mixta</li>
               <li>¿En qué ámbito geográfico se desarrolla la iniciativa? ¿Ciudad, distrito?</li>
             </ul>
-          more_information: (Mas información)
+          more_information: (Más información)
         promotal_committee:
           back: Volver
           continue: Continuar
           individual_help_text: Las iniciativas ciudadanas requieren una Comisión promotora formada por, al menos, tres personas (fedatarias). Es necesario que compartas el siguiente enlace con el resto de personas que promuevan esta iniciativa. Cuando tus contactos reciban el enlace, deberán seguir los pasos indicados.
-          more_information: (Mas información)
+          more_information: (Más información)
         share_committee_link:
           invite_to_committee_help: Enlace para invitar a las personas que formarán parte de la comisión promotora
           continue: Continuar
@@ -277,7 +283,7 @@ es:
           callout_text: ¡Enhorabuena! Tu iniciativa ciudadana se ha creado con éxito.
           go_to_my_initiatives: Ir a mis iniciativas
           back_to_initiatives: Volver a iniciativas
-          more_information: (Mas información)
+          more_information: (Más información)
         finish_help:
           help_text:
             Recuerda que para tramitar correctamente la iniciativa tienes que acceder al panel de administración que en
@@ -305,7 +311,7 @@ es:
         status_change_for: "La iniciativa %{title} ha cambiado su estado"
         status_change_body_for: "La iniciativa %{title} ha cambiado su estado a: %{state}"
         creation_subject: "La iniciativa popular '%{title}' ha sido creada"
-        more_information: Aquí tienes mas información sobre el proceso de creación de iniciativas.
+        more_information: Aquí tienes más información sobre el proceso de creación de iniciativas.
         promotal_committee_help: "Recuerda que al menos debes invitar a %{member_count} personas a la comisión promotora. Reenvía el siguiente enlace para invitar personas a la comisión promotora:"
         initiative_link:
           check_initiative_details: Puedes consultar la iniciativa
