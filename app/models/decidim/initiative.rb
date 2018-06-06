@@ -49,11 +49,14 @@ module Decidim
              dependent: :destroy,
              as: :participatory_space
 
+    mount_uploader :image, Decidim::ImageUploader
+
     enum signature_type: [:online, :offline, :any]
     enum state: [:created, :validating, :discarded, :published, :rejected, :accepted]
 
     validates :title, :description, :state, presence: true
     validates :signature_type, presence: true
+    validates :image, presence: true
     validates :hashtag,
               uniqueness: true,
               allow_blank: true,
@@ -61,28 +64,28 @@ module Decidim
 
     scope :open, lambda {
       published
-        .where.not(state: [:discarded, :rejected, :accepted])
-        .where("signature_start_time <= ?", Time.now.utc)
-        .where("signature_end_time >= ?", Time.now.utc)
+          .where.not(state: [:discarded, :rejected, :accepted])
+          .where("signature_start_time <= ?", Time.now.utc)
+          .where("signature_end_time >= ?", Time.now.utc)
     }
     scope :closed, lambda {
       published
-        .where(state: [:discarded, :rejected, :accepted])
-        .or(where("signature_start_time > ?", Time.now.utc))
-        .or(where("signature_end_time < ?", Time.now.utc))
+          .where(state: [:discarded, :rejected, :accepted])
+          .or(where("signature_start_time > ?", Time.now.utc))
+          .or(where("signature_end_time < ?", Time.now.utc))
     }
-    scope :published, -> { where.not(published_at: nil) }
-    scope :with_state, ->(state) { where(state: state) if state.present? }
+    scope :published, -> {where.not(published_at: nil)}
+    scope :with_state, ->(state) {where(state: state) if state.present?}
 
-    scope :public_spaces, -> { published }
+    scope :public_spaces, -> {published}
 
-    scope :order_by_most_recent, -> { order(created_at: :desc) }
-    scope :order_by_supports, -> { order("initiative_votes_count + coalesce(offline_votes, 0) desc") }
+    scope :order_by_most_recent, -> {order(created_at: :desc)}
+    scope :order_by_supports, -> {order("initiative_votes_count + coalesce(offline_votes, 0) desc")}
     scope :order_by_most_commented, lambda {
       select("decidim_initiatives.*")
-        .left_joins(:comments)
-        .group("decidim_initiatives.id")
-        .order("count(decidim_comments_comments.id) desc")
+          .left_joins(:comments)
+          .group("decidim_initiatives.id")
+          .order("count(decidim_comments_comments.id) desc")
     }
 
     after_save :notify_state_change
@@ -150,7 +153,7 @@ module Decidim
     # RETURNS STRING
     def author_avatar_url
       author.avatar&.url ||
-        ActionController::Base.helpers.asset_path("decidim/default-avatar.svg")
+          ActionController::Base.helpers.asset_path("decidim/default-avatar.svg")
     end
 
     # PUBLIC banner image
@@ -163,8 +166,8 @@ module Decidim
 
     def votes_enabled?
       published? &&
-        signature_start_time <= Time.zone.today &&
-        signature_end_time >= Time.zone.today
+          signature_start_time <= Time.zone.today &&
+          signature_end_time >= Time.zone.today
     end
 
     # Public: Checks if the organization has given an answer for the initiative.
@@ -194,10 +197,10 @@ module Decidim
     def publish!
       return false if published?
       update_attributes(
-        published_at: Time.current,
-        state: "published",
-        signature_start_time: DateTime.now.utc,
-        signature_end_time: DateTime.now.utc + Decidim::Initiatives.default_signature_time_period_length
+          published_at: Time.current,
+          state: "published",
+          signature_start_time: DateTime.now.utc,
+          signature_end_time: DateTime.now.utc + Decidim::Initiatives.default_signature_time_period_length
       )
     end
 
@@ -266,8 +269,8 @@ module Decidim
 
     def accepts_offline_votes?
       Decidim::Initiatives.face_to_face_voting_allowed &&
-        (offline? || any?) &&
-        published?
+          (offline? || any?) &&
+          published?
     end
 
     private

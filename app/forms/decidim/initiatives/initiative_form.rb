@@ -14,12 +14,14 @@ module Decidim
       attribute :scope_id, Integer
       attribute :decidim_user_group_id, Integer
       attribute :signature_type, String
+      attribute :image
 
       validates :title, :description, presence: true
-      validates :title, length: { maximum: 150 }
+      validates :title, length: {maximum: 150}
       validates :signature_type, presence: true
       validates :type_id, presence: true
       validates :scope_id, presence: true
+      validates :image, presence: true
 
       def map_model(model)
         self.type_id = model.type.id

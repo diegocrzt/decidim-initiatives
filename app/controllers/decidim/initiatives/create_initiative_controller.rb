@@ -81,6 +81,8 @@ module Decidim
         CreateInitiative.call(@form, current_user) do
           on(:ok) do |initiative|
             session[:initiative][:id] = initiative.id
+            # Amaia's hack! put nil into image because potato
+            session[:initiative][:image] = nil
             if current_initiative.created_by_individual?
               render_wizard
             else
@@ -101,8 +103,8 @@ module Decidim
 
       def similar_initiatives
         @similar_initiatives ||= Decidim::Initiatives::SimilarInitiatives
-                                 .for(current_organization, @form)
-                                 .all
+                                     .for(current_organization, @form)
+                                     .all
       end
 
       def build_form(klass, parameters)

@@ -46,7 +46,8 @@ module Decidim
             signature_type: form.signature_type,
             hashtag: form.hashtag,
             answer: form.answer,
-            answer_url: form.answer_url
+            answer_url: form.answer_url,
+            image: form.image
           }
 
           attrs[:answered_at] = DateTime.now unless form.answer.blank?
