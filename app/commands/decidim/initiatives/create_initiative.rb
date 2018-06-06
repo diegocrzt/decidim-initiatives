@@ -60,7 +60,8 @@ module Decidim
           decidim_user_group_id: form.decidim_user_group_id,
           scoped_type: scoped_type,
           signature_type: form.signature_type,
-          state: "created"
+          state: "created",
+          image: form.image
         )
       end
 

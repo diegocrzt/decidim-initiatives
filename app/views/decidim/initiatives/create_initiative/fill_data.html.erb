@@ -36,6 +36,10 @@
               <%= f.editor :description, lines: 8, toolbar: :full, required: true %>
             </div>
 
+            <div class="row column">
+              <%= f.upload :image, required: true %>
+            </div>
+
             <div class="field">
               <%= f.select :signature_type, signature_type_options %>
             </div>

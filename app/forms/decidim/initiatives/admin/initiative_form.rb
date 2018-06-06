@@ -19,25 +19,27 @@ module Decidim
         attribute :signature_end_time, Date
         attribute :hashtag, String
         attribute :offline_votes, Integer
+        attribute :image
 
         translatable_attribute :answer, String
         attribute :answer_url, String
 
         validates :title, :description, presence: true
         validates :signature_type, presence: true
-        validates :signature_start_time, presence: true, if: ->(form) { form.context.initiative.published? }
-        validates :signature_end_time, presence: true, if: ->(form) { form.context.initiative.published? }
-        validates :signature_end_time, date: { after: :signature_start_time }, if: lambda { |form|
+        validates :signature_start_time, presence: true, if: ->(form) {form.context.initiative.published?}
+        validates :signature_end_time, presence: true, if: ->(form) {form.context.initiative.published?}
+        validates :signature_end_time, date: {after: :signature_start_time}, if: lambda {|form|
           form.signature_start_time.present? && form.signature_end_time.present?
         }
+        validates :image, file_size: {less_than_or_equal_to: ->(_record) {Decidim.maximum_attachment_size}}, file_content_type: {allow: ["image/jpeg", "image/png"]}, presence: true
 
-        validates :answer, translatable_presence: true, if: ->(form) { form.context.initiative.accepted? }
-        validates :answer_url, presence: true, if: ->(form) { form.context.initiative.accepted? }
+        validates :answer, translatable_presence: true, if: ->(form) {form.context.initiative.accepted?}
+        validates :answer_url, presence: true, if: ->(form) {form.context.initiative.accepted?}
 
         validates :offline_votes,
                   numericality: {
-                    only_integer: true,
-                    greater_than: 0
+                      only_integer: true,
+                      greater_than: 0
                   }, allow_blank: true
 
         def map_model(model)
