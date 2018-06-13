@@ -31,7 +31,8 @@ module Decidim
         validates :signature_end_time, date: {after: :signature_start_time}, if: lambda {|form|
           form.signature_start_time.present? && form.signature_end_time.present?
         }
-        validates :image, file_size: {less_than_or_equal_to: ->(_record) {Decidim.maximum_attachment_size}}, file_content_type: {allow: ["image/jpeg", "image/png"]}, presence: true
+        validates :image, file_size: {less_than_or_equal_to: ->(_record) {Decidim.maximum_attachment_size}}, file_content_type: {allow: ["image/jpeg", "image/png"]}
+        #validates :image, presence: true, if: :image_unavailable? # Not now, always must be an image
 
         validates :answer, translatable_presence: true, if: ->(form) {form.context.initiative.accepted?}
         validates :answer_url, presence: true, if: ->(form) {form.context.initiative.accepted?}
